@@ -67,15 +67,9 @@ void CMainWindow::contextMenuEvent(QContextMenuEvent *apEvent)
         if (nullptr != mpComb)
         {
             // See if we're in a hexagon.
-            const float c_nInscribedRadius = (static_cast<float>(sqrt(3)) / 2.0) * (mpComb->GetCellSize() / 2.0f);
             for (CCell* pIter = mpComb->GetCells(); nullptr != pIter; ++pIter)
             {
-                QPointF qCellPos = (*pIter).GetCenter();
-                float nOppSqr = pow( abs(apEvent->x() - qCellPos.x()), 2.0);
-                float nAdjSqr = pow( abs(apEvent->y() - qCellPos.y()), 2.0);
-                float nDelta = sqrt(nOppSqr + nAdjSqr);
-
-                if (nDelta < c_nInscribedRadius)
+                if ((*pIter).PointInHex(apEvent->pos()))
                 {
                     // Show a context menu!
                     mpSelectedCell = pIter;

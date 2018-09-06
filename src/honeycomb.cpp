@@ -127,6 +127,22 @@ bool CCell::Draw(QPainter *pPainter)
     return bSuccess;
 }
 
+bool CCell::PointInHex(const QPoint& aPt)
+{
+    bool bSuccess = false;
+    if (!aPt.isNull())
+    {
+        const float c_nInscribedRadius = (static_cast<float>(sqrt(3)) / 2.0) * (mnSize / 2.0f);
+        float nOppSqr = pow( abs(aPt.x() - mPosition.x()), 2.0);
+        float nAdjSqr = pow( abs(aPt.y() - mPosition.y()), 2.0);
+        float nDelta = sqrt(nOppSqr + nAdjSqr);
+
+        bSuccess = (nDelta < c_nInscribedRadius) ? true : false;
+    }
+
+    return bSuccess;
+}
+
 float CCell::GetSize()
 {
     return mnSize;

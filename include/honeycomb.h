@@ -2,6 +2,7 @@
 #define _HONEYCOMB_H
 
 #include <QPainter>
+#include <math.h>
 
 #if !defined(_CUSTOM_TYPES_SET)
 typedef unsigned char byte;
@@ -69,6 +70,8 @@ public:
 
     // Workers.
     bool Draw(QPainter *pPainter = nullptr);
+
+    bool PointInHex(const QPoint& aPt);
 
     // Getters.
     float GetSize();
